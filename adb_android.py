@@ -3,6 +3,7 @@ from subprocess import check_output, CalledProcessError, call
 
 import var as v
 
+
 def _isDeviceAvailable():
     """
     Private Function to check if device is available;

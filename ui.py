@@ -256,6 +256,7 @@ def click_sequence():
     f.writelines(properties)    
     """
 
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

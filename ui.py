@@ -112,7 +112,6 @@ class AdbDevice:
         getprop ro.ril.miui.imei1
         """
 
-
     def __init__(self):
         self.imei()
         self.brand()
@@ -205,7 +204,6 @@ class AdbDevice:
         cpu = extract(prop, board, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
 
         return brand, model, firmware, ver, cpu
-
 
     # do MTK Stuff here 
 

@@ -217,6 +217,8 @@ def click_sequence():
     myDevice = AdbDevice()
     mysn = getserialno()
     serial = mysn[1].strip()
+    write_to_ui(str(mysn))
+    #write_to_ui(serial)
     if not is_hex(serial): # i need to change this .
         properties = myDevice.getprop() # properties inside MTK Qualcomm
         result = myDevice.device_details(properties)
@@ -248,7 +250,7 @@ def click_sequence():
     else:
         write_to_ui('Device Not Found!')
     """
-    # DEBUG INFO
+    # DEBUG INFO/
     file = ("log.txt")
     f = open(file,'w')
     f.writelines(properties)    

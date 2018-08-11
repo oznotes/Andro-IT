@@ -217,8 +217,9 @@ def click_sequence():
     myDevice = AdbDevice()
     mysn = getserialno()
     serial = mysn[1].strip()
-    if not is_hex(serial): # i need to change this .
-        properties = myDevice.getprop() # properties inside MTK Qualcomm
+    write_to_ui(serial)
+    if not is_hex(serial):  # i need to change this .( empty __)
+        properties = myDevice.getprop()  # properties inside MTK Qualcomm
         result = myDevice.device_details(properties)
         write_to_ui("Device   : " + result[0] + '\n' +
                     "Model    : " + result[1] + '\n' +

@@ -1,0 +1,17 @@
+
+ignore/check/var.pyc
+ignore/check/var.py
+ignore/check/ui.py
+ignore/check/AdbWinUsbApi.dll
+ignore/check/AdbWinApi.dll
+ignore/adb/__init__.py
+ignore/adb/__init__.pyc
+ignore/adb/adb.exe
+ignore/adb/device.py
+ignore/adb/device.pyc
+ignore/adb/setup.py
+ignore/adb/test.py
+ignore/check/__init__.py
+ignore/check/adb.exe
+ignore/check/adb_android.py
+ignore/check/adb_android.pyc

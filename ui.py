@@ -267,11 +267,3 @@ if __name__ == "__main__":
     ui.setupUi(Widget)
     Widget.show()
     sys.exit(app.exec_())
-
-
-"""
-result = getserialno()
-serial = result[1].strip()
-imei = myDevice.imei()
-
-"""

@@ -195,7 +195,7 @@ class AdbDevice:
         model = "[ro.product.model]: "
         versi = "[ro.build.version.release]: "
         board = "[ro.product.board]: "
-        firmware = "[ro.build.PDA]: "
+        firmware = "[ro.build.description]: "
 
         brand = extract(prop, manufacturer, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
         model = extract(prop, model, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()

@@ -217,17 +217,11 @@ def click_sequence():
     myDevice = AdbDevice()
     mysn = getserialno()
     serial = mysn[1].strip()
-<<<<<<< HEAD
-    write_to_ui(serial)
-    if not is_hex(serial):  # i need to change this .( empty __)
-        properties = myDevice.getprop()  # properties inside MTK Qualcomm
-=======
-
-    #write_to_ui(str(mysn[0])) if there is 0 there is device .
-    #write_to_ui(serial)
+    write_to_ui(serial+"\n")
+    #  write_to_ui(str(mysn[0])) if there is 0 there is device .
+    #  write_to_ui(serial)
     if str(mysn[0]).strip() != "1": # if it is one there is no device
         properties = myDevice.getprop() # properties inside MTK Qualcomm
->>>>>>> b9dc28e52c6083ac22b756309a7a7aac58c92c97
         result = myDevice.device_details(properties)
         write_to_ui("Device".ljust(18) + ":" + result[0] + '\n' +
                     "Model".ljust(18)  + ":" + result[1] + '\n' +
@@ -243,12 +237,12 @@ def click_sequence():
             else:
                 # MTK Checking here .
                 mtk_cpu = myDevice.device_details_mtk(properties)
-                if list(mtk_cpu)[1] is "M" and list(mtk_cpu)[2] is "T":
-                    write_to_ui("CPU      : " + mtk_cpu + '\n')
+                if list(mtk_cpu)[1] is "M" and list(mtk_cpu)[2] is "T":  # :))
+                    write_to_ui("CPU".ljust(18) + ":" + mtk_cpu + '\n')
                     imei_no1 = myDevice.mtk_imei1()
                     imei_no2 = myDevice.mtk_imei2()
-                    write_to_ui("IMEI1    : " + str(imei_no1) + '\n')
-                    write_to_ui("IMEI2    : " + str(imei_no2) + '\n')
+                    write_to_ui("IMEI 1".ljust(18) + ":" + str(imei_no1) + '\n')
+                    write_to_ui("IMEI 2".ljust(18) + ":" + str(imei_no2) + '\n')
                 else:
                     pass
         else:
@@ -261,6 +255,7 @@ def click_sequence():
     file = ("log.txt")
     f = open(file,'w')
     f.writelines(properties)    
+
     """
 
 

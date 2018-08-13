@@ -65,8 +65,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="260" selection-start-line="256" selection-end-line="270" />
+            <state relative-caret-position="469">
+              <caret line="270" lean-forward="true" selection-start-line="270" selection-end-line="270" />
               <folding>
                 <element signature="e#323#367#0" expanded="true" />
               </folding>
@@ -91,7 +91,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="672" />
     <option name="height" value="728" />
   </component>
@@ -180,7 +180,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="DB Browser" />
@@ -213,8 +213,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="260" selection-start-line="256" selection-end-line="270" />
+        <state relative-caret-position="469">
+          <caret line="270" lean-forward="true" selection-start-line="270" selection-end-line="270" />
           <folding>
             <element signature="e#323#367#0" expanded="true" />
           </folding>

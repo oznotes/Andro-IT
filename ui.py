@@ -38,13 +38,13 @@ class Ui_Widget(object):
 
     def setupUi(self, Widget):
         Widget.setObjectName("Widget")
-        Widget.resize(400, 269)
+        Widget.resize(420, 269)
         self.button = QtWidgets.QPushButton(Widget)
-        self.button.setGeometry(QtCore.QRect(310, 220, 75, 23))
+        self.button.setGeometry(QtCore.QRect(330, 220, 75, 23))
         self.button.setObjectName("button")
         self.button.clicked.connect(self.clicked)
         self.mytext = QtWidgets.QTextBrowser(Widget)
-        self.mytext.setGeometry(QtCore.QRect(10, 10, 381, 192))
+        self.mytext.setGeometry(QtCore.QRect(10, 10, 401, 192))
         self.mytext.setObjectName("mytext")
         self.retranslateUi(Widget)
         QtCore.QMetaObject.connectSlotsByName(Widget)

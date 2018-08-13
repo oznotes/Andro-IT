@@ -217,21 +217,29 @@ def click_sequence():
     myDevice = AdbDevice()
     mysn = getserialno()
     serial = mysn[1].strip()
+<<<<<<< HEAD
     write_to_ui(serial)
     if not is_hex(serial):  # i need to change this .( empty __)
         properties = myDevice.getprop()  # properties inside MTK Qualcomm
+=======
+
+    #write_to_ui(str(mysn[0])) if there is 0 there is device .
+    #write_to_ui(serial)
+    if str(mysn[0]).strip() != "1": # if it is one there is no device
+        properties = myDevice.getprop() # properties inside MTK Qualcomm
+>>>>>>> b9dc28e52c6083ac22b756309a7a7aac58c92c97
         result = myDevice.device_details(properties)
-        write_to_ui("Device   : " + result[0] + '\n' +
-                    "Model    : " + result[1] + '\n' +
-                    "Firmware : " + result[2] + '\n' +
-                    "Android  : " + result[3] + '\n' +
-                    "CPU      : " + result[4] + '\n'
+        write_to_ui("Device".ljust(18) + ":" + result[0] + '\n' +
+                    "Model".ljust(18)  + ":" + result[1] + '\n' +
+                    "Firmware".ljust(16) + ":" + result[2] + '\n' +
+                    "Android".ljust(17)  + ":" + result[3] + '\n' +
+                    "CPU".ljust(18) + ":" + result[4] + '\n'
                     )
         if int(str(list(result[3])[0])) > 4:
             imei_no = myDevice.imei()
             imei_no = str(filter(str.isdigit, str(imei_no)))
             if imei_no.isdigit():
-                write_to_ui("IMEI     : " + str(imei_no) + '\n')
+                write_to_ui("IMEI".ljust(18) + ":" + str(imei_no) + '\n')
             else:
                 # MTK Checking here .
                 mtk_cpu = myDevice.device_details_mtk(properties)
@@ -249,7 +257,7 @@ def click_sequence():
     else:
         write_to_ui('Device Not Found!')
     """
-    # DEBUG INFO
+    # DEBUG INFO/
     file = ("log.txt")
     f = open(file,'w')
     f.writelines(properties)    
@@ -265,11 +273,3 @@ if __name__ == "__main__":
     ui.setupUi(Widget)
     Widget.show()
     sys.exit(app.exec_())
-
-
-"""
-result = getserialno()
-serial = result[1].strip()
-imei = myDevice.imei()
-
-"""

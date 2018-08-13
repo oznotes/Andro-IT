@@ -9,7 +9,6 @@
 """
 TODO : CPU Check at first and apply commands accordingly .
 """
-import time
 from PySide2 import QtCore, QtGui, QtWidgets
 from adb_android import *
 
@@ -207,7 +206,7 @@ class AdbDevice:
 
     # do MTK Stuff here 
 
-    def device_details_mtk(self,prop):
+    def device_details_mtk(self, prop):
         platform = "[ro.board.platform]:"
         cpu = extract(prop, platform, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
         return cpu

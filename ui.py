@@ -9,7 +9,7 @@
 """
 TODO : CPU Check at first and apply commands accordingly .
 """
-
+import time
 from PySide2 import QtCore, QtGui, QtWidgets
 from adb_android import *
 
@@ -214,12 +214,11 @@ class AdbDevice:
 
 
 def click_sequence():
+    ui.mytext.clear()
     myDevice = AdbDevice()
     mysn = getserialno()
     serial = mysn[1].strip()
     write_to_ui(serial+"\n")
-    #  write_to_ui(str(mysn[0])) if there is 0 there is device .
-    #  write_to_ui(serial)
     if str(mysn[0]).strip() != "1": # if it is one there is no device
         properties = myDevice.getprop() # properties inside MTK Qualcomm
         result = myDevice.device_details(properties)
@@ -264,7 +263,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Widget = QtWidgets.QWidget()
     ui = Ui_Widget()
-    # ui.button.clicked.connect(click_sequence())
     ui.setupUi(Widget)
     Widget.show()
     sys.exit(app.exec_())

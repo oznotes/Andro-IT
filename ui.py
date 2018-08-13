@@ -40,7 +40,7 @@ class Ui_Widget(object):
         Widget.setObjectName("Widget")
         Widget.resize(420, 269)
         self.button = QtWidgets.QPushButton(Widget)
-        self.button.setGeometry(QtCore.QRect(330, 220, 75, 23))
+        self.button.setGeometry(QtCore.QRect(333, 220, 75, 23))
         self.button.setObjectName("button")
         self.button.clicked.connect(self.clicked)
         self.mytext = QtWidgets.QTextBrowser(Widget)

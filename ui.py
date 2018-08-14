@@ -34,6 +34,7 @@ def write_to_ui(text):
     ui.mytext.insertPlainText(text)
 
 
+
 class Ui_Widget(object):
 
     def setupUi(self, Widget):
@@ -177,6 +178,15 @@ class AdbDevice:
         device_platform = str(device_firmware[1]).replace('\n', ' ').replace('\r', '').upper()
         return device_platform
 
+    def root_check(self):
+        su = \
+            """
+            su -c 'cat /system/build.prop'|grep "ro.product.brand="
+            
+            """
+        read = shell(su)
+        return str(read[1]).replace("\\r", '\r').replace('\\n', '\n').strip("ro.product.brand=")
+
     def partitions(self):
         device_partitions = shell(AdbDevice.get_partitions)
         device_partitions = str(device_partitions[1]) \
@@ -217,9 +227,11 @@ def click_sequence():
     myDevice = AdbDevice()
     mysn = getserialno()
     serial = mysn[1].strip()
+    # root = myDevice.root_check()
     write_to_ui(serial+"\n")
-    if str(mysn[0]).strip() != "1": # if it is one there is no device
-        properties = myDevice.getprop() # properties inside MTK Qualcomm
+    # write_to_ui(root)
+    if str(mysn[0]).strip() != "1":  # if it is one there is no device
+        properties = myDevice.getprop()  # properties inside MTK Qualcomm
         result = myDevice.device_details(properties)
         write_to_ui("Device".ljust(18) + ":" + result[0] + '\n' +
                     "Model".ljust(18)  + ":" + result[1] + '\n' +
@@ -248,13 +260,11 @@ def click_sequence():
             write_to_ui("IMEI     : " + str(imei_no) + '\n')
     else:
         write_to_ui('Device Not Found!')
-    """
-    # DEBUG INFO/
-    file = ("log.txt")
-    f = open(file,'w')
-    f.writelines(properties)    
 
-    """
+    # DEBUG INFO/
+    # file = ("log.txt")
+    # f = open(file,'w')
+    # f.writelines(hi)
 
 
 if __name__ == "__main__":

@@ -228,7 +228,9 @@ def click_sequence():
     mysn = getserialno()
     serial = mysn[1].strip()
     # root = myDevice.root_check()
+    partition_list = myDevice.partitions()
     write_to_ui(serial+"\n")
+    write_to_ui(str(partition_list))
     # write_to_ui(root)
     if str(mysn[0]).strip() != "1":  # if it is one there is no device
         properties = myDevice.getprop()  # properties inside MTK Qualcomm

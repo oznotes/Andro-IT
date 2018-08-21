@@ -11,6 +11,7 @@ TODO : CPU Check at first and apply commands accordingly .
 """
 from PySide2 import QtCore, QtGui, QtWidgets
 
+
 from adb_android import *
 
 

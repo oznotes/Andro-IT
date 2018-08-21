@@ -10,6 +10,7 @@
 TODO : CPU Check at first and apply commands accordingly .
 """
 from PySide2 import QtCore, QtGui, QtWidgets
+
 from adb_android import *
 
 
@@ -175,7 +176,7 @@ class AdbDevice:
 
     def platform(self):
         device_platform = shell(AdbDevice.get_platform)
-        device_platform = str(device_firmware[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_platform = str(device_platform[1]).replace('\n', ' ').replace('\r', '').upper()
         return device_platform
 
     def root_check(self):
@@ -263,7 +264,7 @@ def click_sequence():
     else:
         write_to_ui('Device Not Found!')
 
-    # DEBUG INFO/
+    # DEBUG INFO
     # file = ("log.txt")
     # f = open(file,'w')
     # f.writelines(hi)

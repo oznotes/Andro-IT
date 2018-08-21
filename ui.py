@@ -181,10 +181,9 @@ class AdbDevice:
         return device_platform
 
     def root_check(self):
-        su = \
+        su =\
             """
             su -c 'cat /system/build.prop'|grep "ro.product.brand="
-            
             """
         read = shell(su)
         return str(read[1]).replace("\\r", '\r').replace('\\n', '\n').strip("ro.product.brand=")

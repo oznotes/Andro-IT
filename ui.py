@@ -11,7 +11,6 @@ TODO : CPU Check at first and apply commands accordingly .
 """
 from PySide2 import QtCore, QtGui, QtWidgets
 
-
 from adb_android import *
 
 
@@ -36,7 +35,6 @@ def write_to_ui(text):
     ui.mytext.insertPlainText(text)
 
 
-
 class Ui_Widget(object):
 
     def setupUi(self, Widget):
@@ -53,8 +51,10 @@ class Ui_Widget(object):
         QtCore.QMetaObject.connectSlotsByName(Widget)
 
     def retranslateUi(self, Widget):
-        Widget.setWindowTitle(QtWidgets.QApplication.translate("Widget", "ADB Console", None, -1))
-        self.button.setText(QtWidgets.QApplication.translate("Widget", "Detect", None, -1))
+        Widget.setWindowTitle(QtWidgets.QApplication.translate(
+            "Widget", "ADB Console", None, -1))
+        self.button.setText(QtWidgets.QApplication.translate(
+            "Widget", "Detect", None, -1))
 
     def clicked(self):
         click_sequence()
@@ -152,32 +152,38 @@ class AdbDevice:
 
     def brand(self):
         device_brand = shell(AdbDevice.get_factory)
-        device_brand = str(device_brand[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_brand = str(device_brand[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_brand
 
     def model(self):
         device_model = shell(AdbDevice.get_model)
-        device_model = str(device_model[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_model = str(device_model[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_model
 
     def board(self):
         device_board = shell(AdbDevice.get_board)
-        device_board = str(device_board[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_board = str(device_board[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_board
 
     def version(self):
         device_version = shell(AdbDevice.get_version)
-        device_version = str(device_version[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_version = str(device_version[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_version
 
     def firmware(self):
         device_firmware = shell(AdbDevice.get_firmware)
-        device_firmware = str(device_firmware[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_firmware = str(device_firmware[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_firmware
 
     def platform(self):
         device_platform = shell(AdbDevice.get_platform)
-        device_platform = str(device_platform[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_platform = str(device_platform[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_platform
 
     def root_check(self):
@@ -207,19 +213,25 @@ class AdbDevice:
         board = "[ro.product.board]: "
         firmware = "[ro.build.description]: "
 
-        brand = extract(prop, manufacturer, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        model = extract(prop, model, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        firmware = extract(prop, firmware, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        ver = extract(prop, versi, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        cpu = extract(prop, board, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
+        brand = extract(prop, manufacturer, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        model = extract(prop, model, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        firmware = extract(prop, firmware, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        ver = extract(prop, versi, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        cpu = extract(prop, board, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
 
         return brand, model, firmware, ver, cpu
 
-    # do MTK Stuff here 
+    # do MTK Stuff here
 
     def device_details_mtk(self, prop):
         platform = "[ro.board.platform]:"
-        cpu = extract(prop, platform, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
+        cpu = extract(prop, platform, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
         return cpu
 
 
@@ -237,9 +249,9 @@ def click_sequence():
         properties = myDevice.getprop()  # properties inside MTK Qualcomm
         result = myDevice.device_details(properties)
         write_to_ui("Device".ljust(18) + ":" + result[0] + '\n' +
-                    "Model".ljust(18)  + ":" + result[1] + '\n' +
+                    "Model".ljust(18) + ":" + result[1] + '\n' +
                     "Firmware".ljust(16) + ":" + result[2] + '\n' +
-                    "Android".ljust(17)  + ":" + result[3] + '\n' +
+                    "Android".ljust(17) + ":" + result[3] + '\n' +
                     "CPU".ljust(18) + ":" + result[4] + '\n'
                     )
         if int(str(list(result[3])[0])) > 4:
@@ -254,8 +266,10 @@ def click_sequence():
                     write_to_ui("CPU".ljust(18) + ":" + mtk_cpu + '\n')
                     imei_no1 = myDevice.mtk_imei1()
                     imei_no2 = myDevice.mtk_imei2()
-                    write_to_ui("IMEI 1".ljust(18) + ":" + str(imei_no1) + '\n')
-                    write_to_ui("IMEI 2".ljust(18) + ":" + str(imei_no2) + '\n')
+                    write_to_ui("IMEI 1".ljust(18) +
+                                ":" + str(imei_no1) + '\n')
+                    write_to_ui("IMEI 2".ljust(18) +
+                                ":" + str(imei_no2) + '\n')
                 else:
                     pass
         else:

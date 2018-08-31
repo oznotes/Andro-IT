@@ -1,7 +1,8 @@
-from adb_android import *
 import os
 import re
 import sys
+
+from adb_android import *
 
 
 def clear():

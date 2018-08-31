@@ -1,5 +1,5 @@
 import tempfile
-from subprocess import check_output, CalledProcessError, call
+from subprocess import CalledProcessError, call, check_output
 
 import var as v
 
@@ -36,9 +36,9 @@ def bugreport(dest_file="default.log"):
         dest_file_handler = open(dest_file, "w")
     except IOError:
         print "IOError: Failed to create a log file"
-    
+
     # We have to check if device is available or not before executing this command
-    # as adb bugreport will wait-for-device infinitely and does not come out of 
+    # as adb bugreport will wait-for-device infinitely and does not come out of
     # loop
     # Execute only if device is available only
     if _isDeviceAvailable():
@@ -76,7 +76,8 @@ def devices(opts=[]):
     :param opts: list command options (e.g. ["-r", "-a"])
     :return: result of _exec_command() execution
     """
-    adb_full_cmd = [v.ADB_COMMAND_PREFIX, v.ADB_COMMAND_DEVICES, _convert_opts(opts)]
+    adb_full_cmd = [v.ADB_COMMAND_PREFIX,
+                    v.ADB_COMMAND_DEVICES, _convert_opts(opts)]
     return _exec_command(adb_full_cmd)
 
 
@@ -97,7 +98,8 @@ def install(apk, opts=[]):
     :param opts: list command options (e.g. ["-r", "-a"])
     :return: result of _exec_command() execution
     """
-    adb_full_cmd = [v.ADB_COMMAND_PREFIX, v.ADB_COMMAND_INSTALL, _convert_opts(opts), apk]
+    adb_full_cmd = [v.ADB_COMMAND_PREFIX,
+                    v.ADB_COMMAND_INSTALL, _convert_opts(opts), apk]
     return _exec_command(adb_full_cmd)
 
 
@@ -108,7 +110,8 @@ def uninstall(app, opts=[]):
     :param opts: list command options (e.g. ["-r", "-a"])
     :return: result of _exec_command() execution
     """
-    adb_full_cmd = [v.ADB_COMMAND_PREFIX, v.ADB_COMMAND_UNINSTALL, _convert_opts(opts), app]
+    adb_full_cmd = [v.ADB_COMMAND_PREFIX,
+                    v.ADB_COMMAND_UNINSTALL, _convert_opts(opts), app]
     return _exec_command(adb_full_cmd)
 
 
@@ -135,7 +138,8 @@ def sync():
     Copy host->device only if changed
     :return: result of _exec_command() execution
     """
-    adb_full_cmd = [v.ADB_COMMAND_PREFIX, v.ADB_COMMAND_SHELL ,v.ADB_COMMAND_SYNC]
+    adb_full_cmd = [v.ADB_COMMAND_PREFIX,
+                    v.ADB_COMMAND_SHELL, v.ADB_COMMAND_SYNC]
     return _exec_command(adb_full_cmd)
 
 

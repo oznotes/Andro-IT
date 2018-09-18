@@ -200,6 +200,7 @@ class AdbDevice:
             '\n', ' ').replace('\r', '').upper()
         return device_platform\
 
+
     @staticmethod
     def root_check():
         su =\

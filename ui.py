@@ -198,9 +198,8 @@ class AdbDevice:
         device_platform = shell(AdbDevice.get_platform)
         device_platform = str(device_platform[1]).replace(
             '\n', ' ').replace('\r', '').upper()
-        return device_platform \
- \
- \
+        return device_platform
+
     @staticmethod
     def root_check():
         su = \

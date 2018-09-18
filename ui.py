@@ -58,7 +58,8 @@ class Ui_Widget(object):
         self.button.setText(QtWidgets.QApplication.translate(
             "Widget", "Detect", None, -1))
 
-    def clicked(self):
+    @staticmethod
+    def clicked():
         click_sequence()
 
 
@@ -126,69 +127,81 @@ class AdbDevice:
         self.partitions()
         self.getprop()
 
-    def getprop(self):
+    @staticmethod
+    def getprop():
         prop = shell('getprop')  # get android properties
         prop = str(prop).replace("\\r", '\r').replace('\\n', '\n')  # format
         return prop
 
-    def imei(self):
+    @staticmethod
+    def imei():
         imei_no = shell(AdbDevice.get_imei)
         imei_no = str(imei_no[1]).replace('\n', ' ').replace('\r', '')
         return imei_no
 
-    def imei_old(self):
+    @staticmethod
+    def imei_old():
         imei_no = shell(AdbDevice.get_imei_old)
         imei_no = int(filter(str.isdigit, str(imei_no)))
         # imei_no = imei_no
         return imei_no
 
-    def mtk_imei1(self):
+    @staticmethod
+    def mtk_imei1():
         imei_no = shell(AdbDevice.get_mtk_imei1)
         imei_no = int(filter(str.isdigit, str(imei_no)))
         return imei_no
 
-    def mtk_imei2(self):
+    @staticmethod
+    def mtk_imei2():
         imei_no = shell(AdbDevice.get_mtk_imei2)
         imei_no = int(filter(str.isdigit, str(imei_no)))
         return imei_no
 
-    def brand(self):
+    @staticmethod
+    def brand():
         device_brand = shell(AdbDevice.get_factory)
         device_brand = str(device_brand[1]).replace(
             '\n', ' ').replace('\r', '').upper()
         return device_brand
 
-    def model(self):
+    @staticmethod
+    def model():
         device_model = shell(AdbDevice.get_model)
         device_model = str(device_model[1]).replace(
             '\n', ' ').replace('\r', '').upper()
         return device_model
 
-    def board(self):
+    @staticmethod
+    def board():
         device_board = shell(AdbDevice.get_board)
         device_board = str(device_board[1]).replace(
             '\n', ' ').replace('\r', '').upper()
         return device_board
 
-    def version(self):
+    @staticmethod
+    def version():
         device_version = shell(AdbDevice.get_version)
         device_version = str(device_version[1]).replace(
             '\n', ' ').replace('\r', '').upper()
         return device_version
 
-    def firmware(self):
+    @staticmethod
+    def firmware():
         device_firmware = shell(AdbDevice.get_firmware)
         device_firmware = str(device_firmware[1]).replace(
             '\n', ' ').replace('\r', '').upper()
         return device_firmware
 
-    def platform(self):
+    @staticmethod
+    def platform():
         device_platform = shell(AdbDevice.get_platform)
         device_platform = str(device_platform[1]).replace(
             '\n', ' ').replace('\r', '').upper()
-        return device_platform
+        return device_platform\
 
-    def root_check(self):
+    @staticmethod
+    def root_check():
         su =\
             """
             su -c 'cat /system/build.prop'|grep "ro.product.brand="
@@ -196,7 +209,8 @@ class AdbDevice:
         read = shell(su)
         return str(read[1]).replace("\\r", '\r').replace('\\n', '\n').strip("ro.product.brand=")
 
-    def partitions(self):
+    @staticmethod
+    def partitions():
         device_partitions = shell(AdbDevice.get_partitions)
         device_partitions = str(device_partitions[1]) \
             .replace("\\r", '').replace('\\n', '\n') \
@@ -205,7 +219,8 @@ class AdbDevice:
             .replace('name', '').replace('info', '')
         return device_partitions
 
-    def device_details(self, prop):
+    @staticmethod
+    def device_details(prop):
         """
         Properties of getprop
         """
@@ -228,9 +243,8 @@ class AdbDevice:
 
         return brand, model, firmware, ver, cpu
 
-    # do MTK Stuff here
-
-    def device_details_mtk(self, prop):
+    @staticmethod
+    def device_details_mtk(prop):
         platform = "[ro.board.platform]:"
         cpu = extract(prop, platform, '\n').replace(
             '[', '').replace(']', '').replace('\r', '').upper()

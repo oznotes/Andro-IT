@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import rsa
-
 from pyasn1.codec.der import decoder
 from pyasn1.type import univ
 from rsa import pkcs1

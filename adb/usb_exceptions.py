@@ -29,7 +29,8 @@ class FormatMessageWithArgumentsException(CommonUsbError):
 
     def __init__(self, message, *args):
         message %= args
-        super(FormatMessageWithArgumentsException, self).__init__(message, *args)
+        super(FormatMessageWithArgumentsException,
+              self).__init__(message, *args)
 
 
 class DeviceNotFoundError(FormatMessageWithArgumentsException):

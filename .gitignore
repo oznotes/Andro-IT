@@ -12,3 +12,13 @@ ignore/another adb/adb/adb_commands.pyc
 ignore/another adb/adb/adb_protocol.py
 ignore/another adb/adb/common.pyc
 ignore/another adb/adb/common.py
+ignore/adb/device.py
+ignore/adb/setup.py
+ignore/adb/test.py
+ignore/another adb/adb/adb_debug.py
+ignore/another adb/adb/common_cli.py
+ignore/another adb/adb/fastboot.py
+ignore/another adb/adb/sign_pycryptodome.py
+ignore/check/__init__.py
+ignore/check/adb.exe
+ignore/another adb/adb/sign_m2crypto.pyc

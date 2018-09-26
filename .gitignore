@@ -1,3 +1,9 @@
 
-ignore/another adb/adb/fastboot.py
-ignore/another adb/adb/sign_m2crypto.py
+ignore/another adb/adb/adb_protocol.pyc
+ignore/another adb/adb/usb_exceptions.pyc
+ignore/adb/device.pyc
+ignore/adb/adb.exe
+ignore/adb/__init__.pyc
+ignore/adb/__init__.py
+ignore/another adb/adb/__init__.pyc
+ignore/another adb/adb/adb_commands.py

@@ -20,12 +20,14 @@ import logging
 import os
 import struct
 
-from adb import common
-from adb import usb_exceptions
+from adb import common, usb_exceptions
 
 _LOG = logging.getLogger('fastboot')
 
-DEFAULT_MESSAGE_CALLBACK = lambda m: logging.info('Got %s from device', m)
+
+def DEFAULT_MESSAGE_CALLBACK(m): return logging.info('Got %s from device', m)
+
+
 FastbootMessage = collections.namedtuple(  # pylint: disable=invalid-name
     'FastbootMessage', ['message', 'header'])
 
@@ -54,7 +56,7 @@ class FastbootStateMismatch(usb_exceptions.FormatMessageWithArgumentsException):
 
 
 class FastbootInvalidResponse(
-    usb_exceptions.FormatMessageWithArgumentsException):
+        usb_exceptions.FormatMessageWithArgumentsException):
     """Fastboot responded with a header we didn't expect."""
 
 

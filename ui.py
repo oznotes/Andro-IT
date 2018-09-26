@@ -11,14 +11,9 @@ TODO : CPU Check at first and apply commands accordingly .
 TODO : https://github.com/google/python-adb
 
 """
-import struct
-import unittest
-from io import BytesIO
+
 
 from PySide2 import QtCore, QtGui, QtWidgets
-
-from adb import adb_commands, adb_protocol
-from adb.usb_exceptions import TcpTimeoutException
 from adb_android import *
 
 

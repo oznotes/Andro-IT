@@ -25,8 +25,7 @@ import time
 
 import libusb1
 
-from adb import adb_protocol
-from adb import usb_exceptions
+from adb import adb_protocol, usb_exceptions
 
 # Default mode for pushed files.
 DEFAULT_PUSH_MODE = stat.S_IFREG | stat.S_IRWXU | stat.S_IRWXG
@@ -85,7 +84,8 @@ class FilesyncProtocol(object):
         """Pull a file from the device into the file-like dest_file."""
         if progress_callback:
             total_bytes = cls.Stat(connection, filename)[1]
-            progress = cls._HandleProgress(lambda current: progress_callback(filename, current, total_bytes))
+            progress = cls._HandleProgress(
+                lambda current: progress_callback(filename, current, total_bytes))
             next(progress)
 
         cnxn = FileSyncConnection(connection, b'<2I')
@@ -98,7 +98,8 @@ class FilesyncProtocol(object):
                 if progress_callback:
                     progress.send(len(data))
         except usb_exceptions.CommonUsbError as e:
-            raise PullFailedError('Unable to pull file %s due to: %s' % (filename, e))
+            raise PullFailedError(
+                'Unable to pull file %s due to: %s' % (filename, e))
 
     @classmethod
     def _HandleProgress(cls, progress_callback):
@@ -139,8 +140,10 @@ class FilesyncProtocol(object):
         cnxn.Send(b'SEND', fileinfo)
 
         if progress_callback:
-            total_bytes = os.fstat(datafile.fileno()).st_size if isinstance(datafile, file) else -1
-            progress = cls._HandleProgress(lambda current: progress_callback(filename, current, total_bytes))
+            total_bytes = os.fstat(datafile.fileno()).st_size if isinstance(
+                datafile, file) else -1
+            progress = cls._HandleProgress(
+                lambda current: progress_callback(filename, current, total_bytes))
             next(progress)
 
         while True:
@@ -225,7 +228,8 @@ class FileSyncConnection(object):
                 reason = ''
                 if self.recv_buffer:
                     reason = self.recv_buffer.decode('utf-8', errors='ignore')
-                raise usb_exceptions.AdbCommandFailureException('Command failed: {}'.format(reason))
+                raise usb_exceptions.AdbCommandFailureException(
+                    'Command failed: {}'.format(reason))
             raise adb_protocol.InvalidResponseError(
                 'Expected one of %s, got %s' % (expected_ids, command_id))
 

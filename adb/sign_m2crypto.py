@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from M2Crypto import RSA
-
 from adb import adb_protocol
+from M2Crypto import RSA
 
 
 class M2CryptoSigner(adb_protocol.AuthSigner):

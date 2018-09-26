@@ -20,9 +20,10 @@ outputting the results.
 """
 
 from __future__ import print_function
+
 import argparse
-import io
 import inspect
+import io
 import logging
 import re
 import sys
@@ -88,7 +89,8 @@ def _DocToArgs(doc):
 
 def MakeSubparser(subparsers, parents, method, arguments=None):
     """Returns an argparse subparser to create a 'subcommand' to adb."""
-    name = ('-'.join(re.split(r'([A-Z][a-z]+)', method.__name__)[1:-1:2])).lower()
+    name = ('-'.join(re.split(r'([A-Z][a-z]+)',
+                              method.__name__)[1:-1:2])).lower()
     help = method.__doc__.splitlines()[0]
     subparser = subparsers.add_parser(
         name=name, description=help, help=help.rstrip('.'), parents=parents)

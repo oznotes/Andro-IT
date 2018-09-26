@@ -20,6 +20,7 @@ host side.
 import struct
 import time
 from io import BytesIO
+
 from adb import usb_exceptions
 
 # Maximum amount of data in an ADB packet.
@@ -158,7 +159,8 @@ class _AdbConnection(object):
         cmd, data = self.ReadUntil(b'CLSE')
         if cmd != b'CLSE':
             if cmd == b'FAIL':
-                raise usb_exceptions.AdbCommandFailureException('Command failed.', data)
+                raise usb_exceptions.AdbCommandFailureException(
+                    'Command failed.', data)
             raise InvalidCommandError('Expected a CLSE response, got %s (%s)',
                                       cmd, data)
 
@@ -225,7 +227,8 @@ class AdbMessage(object):
             cmd, arg0, arg1, data_length, data_checksum, unused_magic = struct.unpack(
                 cls.format, message)
         except struct.error as e:
-            raise ValueError('Unable to unpack ADB command.', cls.format, message, e)
+            raise ValueError('Unable to unpack ADB command.',
+                             cls.format, message, e)
         return cmd, arg0, arg1, data_length, data_checksum
 
     def Send(self, usb, timeout_ms=None):
@@ -322,7 +325,8 @@ class AdbMessage(object):
                 msg = cls(
                     command=b'AUTH', arg0=AUTH_SIGNATURE, arg1=0, data=signed_token)
                 msg.Send(usb)
-                cmd, arg0, unused_arg1, banner = cls.Read(usb, [b'CNXN', b'AUTH'])
+                cmd, arg0, unused_arg1, banner = cls.Read(
+                    usb, [b'CNXN', b'AUTH'])
                 if cmd == b'CNXN':
                     return banner
             # None of the keys worked, so send a public key.
@@ -461,7 +465,8 @@ class AdbMessage(object):
             user_pos = delim.find(b'@')
             dir_pos = delim.rfind(b':/')
             if user_pos != -1 and dir_pos != -1:
-                partial_delim = delim[user_pos:dir_pos + 1]  # e.g. @hammerhead:
+                # e.g. @hammerhead:
+                partial_delim = delim[user_pos:dir_pos + 1]
             else:
                 partial_delim = delim
         else:
@@ -512,19 +517,23 @@ class AdbMessage(object):
 
                 bsruns = {}  # Backspace runs tracking
                 next_start_pos = 0
-                last_run_pos, last_run_len = find_backspace_runs(stdout_bytes, next_start_pos)
+                last_run_pos, last_run_len = find_backspace_runs(
+                    stdout_bytes, next_start_pos)
 
                 if last_run_pos != -1 and last_run_len != 0:
                     bsruns.update({last_run_pos: last_run_len})
-                    cleaned_stdout_stream.write(stdout_bytes[next_start_pos:(last_run_pos - last_run_len)])
+                    cleaned_stdout_stream.write(
+                        stdout_bytes[next_start_pos:(last_run_pos - last_run_len)])
                     next_start_pos += last_run_pos + last_run_len
 
                 while last_run_pos != -1:
-                    last_run_pos, last_run_len = find_backspace_runs(stdout_bytes[next_start_pos:], next_start_pos)
+                    last_run_pos, last_run_len = find_backspace_runs(
+                        stdout_bytes[next_start_pos:], next_start_pos)
 
                     if last_run_pos != -1:
                         bsruns.update({last_run_pos: last_run_len})
-                        cleaned_stdout_stream.write(stdout_bytes[next_start_pos:(last_run_pos - last_run_len)])
+                        cleaned_stdout_stream.write(
+                            stdout_bytes[next_start_pos:(last_run_pos - last_run_len)])
                         next_start_pos += last_run_pos + last_run_len
 
                 cleaned_stdout_stream.write(stdout_bytes[next_start_pos:])

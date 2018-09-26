@@ -24,12 +24,10 @@ All timeouts are in milliseconds.
 
 import io
 import os
-import socket
 import posixpath
+import socket
 
-from adb import adb_protocol
-from adb import common
-from adb import filesync_protocol
+from adb import adb_protocol, common, filesync_protocol
 
 # From adb.h
 CLASS = 0xFF
@@ -128,7 +126,8 @@ class AdbCommands(object):
         if 'handle' in kwargs:
             self._handle = kwargs.pop('handle')
         elif serial and b':' in serial:
-            self._handle = common.TcpHandle(serial, timeout_ms=default_timeout_ms)
+            self._handle = common.TcpHandle(
+                serial, timeout_ms=default_timeout_ms)
         else:
             self._handle = common.UsbHandle.FindAndOpen(
                 DeviceIsAvailable, port_path=port_path, serial=serial,
@@ -165,7 +164,8 @@ class AdbCommands(object):
         if not banner:
             banner = socket.gethostname().encode()
 
-        conn_str = self.protocol_handler.Connect(self._handle, banner=banner, **kwargs)
+        conn_str = self.protocol_handler.Connect(
+            self._handle, banner=banner, **kwargs)
 
         # Remove banner and colons after device state (state::banner)
         parts = conn_str.split(b'::')
@@ -207,7 +207,8 @@ class AdbCommands(object):
             destination_dir = '/data/local/tmp/'
         basename = os.path.basename(apk_path)
         destination_path = posixpath.join(destination_dir, basename)
-        self.Push(apk_path, destination_path, timeout_ms=timeout_ms, progress_callback=transfer_progress_callback)
+        self.Push(apk_path, destination_path, timeout_ms=timeout_ms,
+                  progress_callback=transfer_progress_callback)
 
         cmd = ['pm install']
         if grant_permissions:
@@ -268,7 +269,7 @@ class AdbCommands(object):
         with source_file:
             connection = self.protocol_handler.Open(
                 self._handle, destination=b'sync:', timeout_ms=timeout_ms)
-            kwargs={}
+            kwargs = {}
             if st_mode is not None:
                 kwargs['st_mode'] = st_mode
             self.filesync_handler.Push(connection, source_file, device_filename,
@@ -300,7 +301,8 @@ class AdbCommands(object):
         conn = self.protocol_handler.Open(
             self._handle, destination=b'sync:', timeout_ms=timeout_ms)
 
-        self.filesync_handler.Pull(conn, device_filename, dest_file, progress_callback)
+        self.filesync_handler.Pull(
+            conn, device_filename, dest_file, progress_callback)
 
         conn.Close()
         if isinstance(dest_file, io.BytesIO):
@@ -314,7 +316,8 @@ class AdbCommands(object):
 
     def Stat(self, device_filename):
         """Get a file's stat() information."""
-        connection = self.protocol_handler.Open(self._handle, destination=b'sync:')
+        connection = self.protocol_handler.Open(
+            self._handle, destination=b'sync:')
         mode, size, mtime = self.filesync_handler.Stat(
             connection, device_filename)
         connection.Close()
@@ -326,7 +329,8 @@ class AdbCommands(object):
         Args:
           device_path: Directory to list.
         """
-        connection = self.protocol_handler.Open(self._handle, destination=b'sync:')
+        connection = self.protocol_handler.Open(
+            self._handle, destination=b'sync:')
         listing = self.filesync_handler.List(connection, device_path)
         connection.Close()
         return listing

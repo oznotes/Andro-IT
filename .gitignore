@@ -7,3 +7,8 @@ ignore/adb/__init__.pyc
 ignore/adb/__init__.py
 ignore/another adb/adb/__init__.pyc
 ignore/another adb/adb/adb_commands.py
+ignore/another adb/adb/__init__.py
+ignore/another adb/adb/adb_commands.pyc
+ignore/another adb/adb/adb_protocol.py
+ignore/another adb/adb/common.pyc
+ignore/another adb/adb/common.py

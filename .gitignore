@@ -22,3 +22,16 @@ ignore/another adb/adb/sign_pycryptodome.py
 ignore/check/__init__.py
 ignore/check/adb.exe
 ignore/another adb/adb/sign_m2crypto.pyc
+ignore/another adb/adb/filesync_protocol.py
+ignore/another adb/adb/filesync_protocol.pyc
+ignore/another adb/adb/sign_m2crypto.py
+ignore/another adb/adb/sign_pythonrsa.py
+ignore/check/ui.py
+ignore/check/adb_android.pyc
+ignore/check/AdbWinUsbApi.dll
+ignore/another adb/adb/usb_exceptions.py
+ignore/check/adb_android.py
+ignore/check/var.pyc
+ignore/check/var.py
+ignore/check/AdbWinApi.dll
+ignore/another adb/adb/fastboot_debug.py

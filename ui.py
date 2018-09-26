@@ -8,7 +8,6 @@
 # WARNING! All changes made in this file will be lost!
 """
 TODO : CPU Check at first and apply commands accordingly .
-TODO : https://github.com/google/python-adb
 
 """
 

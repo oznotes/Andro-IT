@@ -17,10 +17,10 @@ Common usb browsing, and usb communication.
 """
 import logging
 import platform
+import select
 import socket
 import threading
 import weakref
-import select
 
 import libusb1
 import usb1
@@ -122,7 +122,8 @@ class UsbHandle(object):
                 handle.detachKernelDriver(iface_number)
         except libusb1.USBError as e:
             if e.value == libusb1.LIBUSB_ERROR_NOT_FOUND:
-                _LOG.warning('Kernel driver not found for interface: %s.', iface_number)
+                _LOG.warning(
+                    'Kernel driver not found for interface: %s.', iface_number)
             else:
                 raise
         handle.claimInterface(iface_number)
@@ -204,7 +205,8 @@ class UsbHandle(object):
         """Returns a device matcher for the given port path."""
         if isinstance(port_path, str):
             # Convert from sysfs path to port_path.
-            port_path = [int(part) for part in SYSFS_PORT_SPLIT_RE.split(port_path)]
+            port_path = [int(part)
+                         for part in SYSFS_PORT_SPLIT_RE.split(port_path)]
         return lambda device: device.port_path == port_path
 
     @classmethod
@@ -281,7 +283,8 @@ class UsbHandle(object):
             if setting is None:
                 continue
 
-            handle = cls(device, setting, usb_info=usb_info, timeout_ms=timeout_ms)
+            handle = cls(device, setting, usb_info=usb_info,
+                         timeout_ms=timeout_ms)
             if device_matcher is None or device_matcher(handle):
                 yield handle
 
@@ -306,7 +309,8 @@ class TcpHandle(object):
         self._serial_number = '%s:%s' % (host, port)
         self._timeout_ms = float(timeout_ms) if timeout_ms else None
         timeout = self.TimeoutSeconds(self._timeout_ms)
-        self._connection = socket.create_connection((host, port), timeout=timeout)
+        self._connection = socket.create_connection(
+            (host, port), timeout=timeout)
         if timeout:
             self._connection.setblocking(0)
 

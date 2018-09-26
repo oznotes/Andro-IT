@@ -35,12 +35,12 @@ def bugreport(dest_file="default.log"):
     try:
         dest_file_handler = open(dest_file, "w")
     except IOError:
-        print "IOError: Failed to create a log file"
+        print("IOError: Failed to create a log file")
 
-    # We have to check if device is available or not before executing this command
-    # as adb bugreport will wait-for-device infinitely and does not come out of
-    # loop
-    # Execute only if device is available only
+        # We have to check if device is available or not before executing this command
+        # as adb bugreport will wait-for-device infinitely and does not come out of
+        # loop
+        # Execute only if device is available only
     if _isDeviceAvailable():
         result = _exec_command_to_file(adb_full_cmd, dest_file_handler)
         return (result, "Success: Bug report saved to: " + dest_file)

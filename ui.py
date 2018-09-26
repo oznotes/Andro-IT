@@ -14,6 +14,7 @@ TODO : https://github.com/google/python-adb
 
 
 from PySide2 import QtCore, QtGui, QtWidgets
+
 from adb_android import *
 
 

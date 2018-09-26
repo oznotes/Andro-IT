@@ -23,8 +23,7 @@ import stat
 import sys
 import time
 
-from adb import adb_commands
-from adb import common_cli
+from adb import adb_commands, common_cli
 
 try:
     from adb import sign_m2crypto
@@ -72,16 +71,16 @@ def List(device, device_path):
     maxsize = max(len(str(f.size)) for f in files)
     for f in files:
         mode = (
-                ('d' if stat.S_ISDIR(f.mode) else '-') +
-                ('r' if f.mode & stat.S_IRUSR else '-') +
-                ('w' if f.mode & stat.S_IWUSR else '-') +
-                ('x' if f.mode & stat.S_IXUSR else '-') +
-                ('r' if f.mode & stat.S_IRGRP else '-') +
-                ('w' if f.mode & stat.S_IWGRP else '-') +
-                ('x' if f.mode & stat.S_IXGRP else '-') +
-                ('r' if f.mode & stat.S_IROTH else '-') +
-                ('w' if f.mode & stat.S_IWOTH else '-') +
-                ('x' if f.mode & stat.S_IXOTH else '-'))
+            ('d' if stat.S_ISDIR(f.mode) else '-') +
+            ('r' if f.mode & stat.S_IRUSR else '-') +
+            ('w' if f.mode & stat.S_IWUSR else '-') +
+            ('x' if f.mode & stat.S_IXUSR else '-') +
+            ('r' if f.mode & stat.S_IRGRP else '-') +
+            ('w' if f.mode & stat.S_IWGRP else '-') +
+            ('x' if f.mode & stat.S_IXGRP else '-') +
+            ('r' if f.mode & stat.S_IROTH else '-') +
+            ('w' if f.mode & stat.S_IWOTH else '-') +
+            ('x' if f.mode & stat.S_IXOTH else '-'))
         t = time.gmtime(f.mtime)
         yield '%s %*d %04d-%02d-%02d %02d:%02d:%02d %-*s\n' % (
             mode, maxsize, f.size,
@@ -116,7 +115,8 @@ def Shell(device, *command):
             elif cmd == 'exit':
                 break
             else:
-                stdout = device.InteractiveShell(cmd, strip_cmd=True, delim=terminal_prompt, strip_delim=True)
+                stdout = device.InteractiveShell(
+                    cmd, strip_cmd=True, delim=terminal_prompt, strip_delim=True)
                 if stdout:
                     if isinstance(stdout, bytes):
                         stdout = stdout.decode('utf-8')
@@ -152,7 +152,8 @@ def main():
 
     common_cli.MakeSubparser(
         subparsers, parents, adb_commands.AdbCommands.Install)
-    common_cli.MakeSubparser(subparsers, parents, adb_commands.AdbCommands.Uninstall)
+    common_cli.MakeSubparser(
+        subparsers, parents, adb_commands.AdbCommands.Uninstall)
     common_cli.MakeSubparser(subparsers, parents, List)
     common_cli.MakeSubparser(subparsers, parents, Logcat)
     common_cli.MakeSubparser(
@@ -170,9 +171,12 @@ def main():
         subparsers, parents, adb_commands.AdbCommands.RebootBootloader)
     common_cli.MakeSubparser(
         subparsers, parents, adb_commands.AdbCommands.Remount)
-    common_cli.MakeSubparser(subparsers, parents, adb_commands.AdbCommands.Root)
-    common_cli.MakeSubparser(subparsers, parents, adb_commands.AdbCommands.EnableVerity)
-    common_cli.MakeSubparser(subparsers, parents, adb_commands.AdbCommands.DisableVerity)
+    common_cli.MakeSubparser(
+        subparsers, parents, adb_commands.AdbCommands.Root)
+    common_cli.MakeSubparser(
+        subparsers, parents, adb_commands.AdbCommands.EnableVerity)
+    common_cli.MakeSubparser(
+        subparsers, parents, adb_commands.AdbCommands.DisableVerity)
     common_cli.MakeSubparser(subparsers, parents, Shell)
 
     if len(sys.argv) == 1:
@@ -187,7 +191,8 @@ def main():
         if os.path.isfile(default):
             args.rsa_key_path = [default]
     if args.rsa_key_path and not rsa_signer:
-        parser.error('Please install either M2Crypto, python-rsa, or PycryptoDome')
+        parser.error(
+            'Please install either M2Crypto, python-rsa, or PycryptoDome')
 
     # Hacks so that the generated doc is nicer.
     if args.command_name == 'devices':

@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Python27\\python.exe",
+    "python.pythonPath": "C:\\Users\\oz\\AppData\\Local\\Continuum\\anaconda3\\python.exe",
     "python.unitTest.pyTestArgs": [
         "."
     ],

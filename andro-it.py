@@ -86,27 +86,32 @@ class AdbDevice:
 
     def brand(self):
         device_brand = shell(AdbDevice.get_factory)
-        device_brand = str(device_brand[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_brand = str(device_brand[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_brand
 
     def model(self):
         device_model = shell(AdbDevice.get_model)
-        device_model = str(device_model[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_model = str(device_model[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_model
 
     def board(self):
         device_board = shell(AdbDevice.get_board)
-        device_board = str(device_board[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_board = str(device_board[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_board
 
     def version(self):
         device_version = shell(AdbDevice.get_version)
-        device_version = str(device_version[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_version = str(device_version[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_version
 
     def firmware(self):
         device_firmware = shell(AdbDevice.get_firmware)
-        device_firmware = str(device_firmware[1]).replace('\n', ' ').replace('\r', '').upper()
+        device_firmware = str(device_firmware[1]).replace(
+            '\n', ' ').replace('\r', '').upper()
         return device_firmware
 
     def partitions(self):
@@ -119,7 +124,6 @@ class AdbDevice:
         return device_partitions
 
     def device_details(self, prop):
-
         """
         Properties of getprop
         """
@@ -129,11 +133,16 @@ class AdbDevice:
         board = "[ro.product.board]: "
         firmware = "[ro.build.PDA]: "
 
-        brand = extract(prop, manufacturer, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        model = extract(prop, model, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        firmware = extract(prop, firmware, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        ver = extract(prop, versi, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
-        cpu = extract(prop, board, '\n').replace('[', '').replace(']', '').replace('\r', '').upper()
+        brand = extract(prop, manufacturer, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        model = extract(prop, model, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        firmware = extract(prop, firmware, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        ver = extract(prop, versi, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
+        cpu = extract(prop, board, '\n').replace(
+            '[', '').replace(']', '').replace('\r', '').upper()
 
         return brand, model, firmware, ver, cpu
 
@@ -148,12 +157,12 @@ if is_hex(serial) is True:
     device = myDevice.device_details(properties)
 
     print(
-            "Device   : " + device[0] + '\n' + \
-            "Model    : " + device[1] + '\n' + \
-            "Firmware : " + device[2] + '\n' + \
-            "Android  : " + device[3] + '\n' + \
-            "CPU      : " + device[4] + '\n' + \
-            "IMEI     : " + imei
+        "Device   : " + device[0] + '\n' +
+        "Model    : " + device[1] + '\n' +
+        "Firmware : " + device[2] + '\n' +
+        "Android  : " + device[3] + '\n' +
+        "CPU      : " + device[4] + '\n' +
+        "IMEI     : " + imei
     )
 else:
-    print ("No Device Here")
+    print("No Device Here")
